@@ -6,7 +6,7 @@
     <FooterSection />
 
     <!-- Audio autoplay -->
-    <audio ref="bgMusic" src="../src/assets/afterhours.mp3" autoplay loop></audio>
+    <audio ref="bgMusic" :src="musicSrc" loop></audio>
   </div>
 </template>
 
@@ -17,22 +17,32 @@ import StorySection from './components/StorySection.vue'
 import GallerySection from './components/GallerySection.vue'
 import FooterSection from './components/FooterSection.vue'
 
+// gunakan import agar path asset resolve dengan benar saat build
+import afterhours from './assets/afterhours.mp3'
+
 const bgMusic = ref(null)
+const musicSrc = afterhours
 
 onMounted(() => {
   const playMusic = () => {
-    bgMusic.value
-      ?.play()
-      .then(() => console.log('🎧 Musik berhasil diputar'))
+    const audio = bgMusic.value
+    if (!audio) return
+
+    audio.volume = 0.6 // atur volume sesuai keinginan
+
+    audio
+      .play()
+      .then(() => {
+        console.log('🎧 Musik berhasil diputar otomatis')
+      })
       .catch(() => {
-        console.warn('Autoplay diblokir browser — menunggu klik pertama...')
-        document.addEventListener(
-          'click',
-          () => {
-            bgMusic.value.play()
-          },
-          { once: true }
-        )
+        console.warn('⚠️ Autoplay diblokir browser — menunggu klik pertama...')
+        // Jika autoplay diblokir, tunggu interaksi user
+        const onUserInteract = () => {
+          audio.play().catch(err => console.error('Gagal memulai musik:', err))
+          document.removeEventListener('click', onUserInteract)
+        }
+        document.addEventListener('click', onUserInteract, { once: true })
       })
   }
 

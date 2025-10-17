@@ -92,7 +92,6 @@ onMounted(() => {
   align-items: center;
 }
 
-/* ✨ Lapisan gelap lembut dengan efek vignette */
 .overlay {
   content: "";
   position: absolute;
@@ -125,19 +124,21 @@ onMounted(() => {
   opacity: 0.9;
 }
 
-/* 🖼️ Galeri foto sinematik */
 .photos {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.6rem;
   position: relative;
   z-index: 1;
+  width: 100%;
+  max-width: 1000px;
+  justify-items: center;
 }
 
 .photo {
-  width: 290px;
-  height: 290px;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1 / 1;
   border-radius: 18px;
   object-fit: cover;
   filter: brightness(0.95) contrast(1.1);
@@ -152,7 +153,6 @@ onMounted(() => {
   filter: brightness(1.1) contrast(1.15);
 }
 
-/* 🎞️ Efek grain halus */
 .story::after {
   content: "";
   position: absolute;
@@ -163,19 +163,31 @@ onMounted(() => {
   pointer-events: none;
 }
 
-/* Responsif */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+  .photos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .photos {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
   .photo {
     width: 85%;
-    height: 260px;
+    max-width: 380px;
+    aspect-ratio: 4 / 5;
   }
 
   .content h2 {
-    font-size: 2.1rem;
+    font-size: 2rem;
   }
 
   .content p {
     font-size: 1rem;
+    line-height: 1.6;
   }
 }
 </style>
