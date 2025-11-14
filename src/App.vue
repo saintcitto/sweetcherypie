@@ -15,8 +15,7 @@ import HeroSection from './components/HeroSection.vue'
 import StorySection from './components/StorySection.vue'
 import GallerySection from './components/GallerySection.vue'
 import FooterSection from './components/FooterSection.vue'
-
-import afterhours from './assets/afterhours.mp3'
+import afterhours from '../assets/afterhours.mp3'
 
 const bgMusic = ref(null)
 const musicSrc = afterhours
