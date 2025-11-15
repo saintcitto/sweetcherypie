@@ -209,7 +209,6 @@ onMounted(() => {
   background: radial-gradient(circle at top, #000 0%, #0a0608 80%);
   text-align: center;
   color: #fff;
-  /* overflow: hidden; <-- INI PERBAIKANNYA (DIHAPUS) */
   max-width: 100%; 
 }
 
@@ -249,6 +248,8 @@ onMounted(() => {
   background: #000;
   display: flex;
   align-items: flex-end;
+  /* KUNCI: Tambahkan justify-content center */
+  justify-content: center;
   padding-bottom: 12px;
   transition: 0.6s ease;
   flex: 1;
@@ -305,12 +306,18 @@ onMounted(() => {
 .caption {
   position: relative;
   z-index: 4;
-  width: 100%;
+  
+  /* KUNCI PERBAIKAN: Hapus width: 100% */
+  /* width: 100%; */
+
+  /* KUNCI PERBAIKAN: Atur max-width agar tidak 'bocor' */
+  max-width: 90%;
+  
   text-align: center;
   background: rgba(0,0,0,0.55);
   border-radius: 12px;
   padding: 5px 10px;
-  margin: 8px auto;
+  margin: 8px; /* Hapus 'auto' agar tidak bentrok */
   font-size: 0.9rem;
   font-style: italic;
   white-space: nowrap;
