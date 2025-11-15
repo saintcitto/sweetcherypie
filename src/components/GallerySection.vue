@@ -59,8 +59,6 @@
 </template>
 
 <script setup>
-import DebugOnly from './DebugOnly.vue'
-
 import { ref, onMounted } from 'vue'
 
 import ch1 from '../assets/story/chery1.mp4'
@@ -211,7 +209,7 @@ onMounted(() => {
   background: radial-gradient(circle at top, #000 0%, #0a0608 80%);
   text-align: center;
   color: #fff;
-  overflow: hidden; 
+  /* overflow: hidden; <-- INI PERBAIKANNYA (DIHAPUS) */
   max-width: 100%; 
 }
 
